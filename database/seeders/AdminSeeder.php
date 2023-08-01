@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Role;
+use App\Models\User;
 
 class AdminSeeder extends Seeder
 {
@@ -15,13 +16,15 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        $admin = [
-            'name' => 'Admin',
-            'email' => 'admin@blog.com',
-            'password' => Hash::make('admin_123'),
-            'role' => 1, 
-        ];
+        // Create an admin role (assuming the roles table already has the admin role with id = 0)
+        $adminRole = Role::where('id', 1)->first();
 
-        DB::table('users')->insert($admin);
+        // Create an admin user
+        User::create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('admin_password'),
+            'role_id' => $adminRole->id,
+        ]);
     }
 }
