@@ -7,31 +7,28 @@
     <div class="d-sm-flex align-items-center mx-4 my-3">
         <h1>Edit User</h1>
     </div>
-    <form action="{{route('users.store')}}" method="POST">
+    <form action="{{ route('users.update', $user->id) }}" method="POST">
         @csrf
         <div class="card-body">
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label for="inputEmail4">Name</label>
-                        <input type="text" class="form-control" id="inputEmail4" placeholder="Name" name="name" required value="{{ old('name')}}">
+                        <input type="text" class="form-control" id="inputEmail4" placeholder="Name" name="name" required value="{{ $user->name }}">
                     </div>                        
                     <div class="form-group col-md-4">
                         <label for="inputEmail4">Role</label>
                         <select name="role" id="role" class="form-control">
-                            <option value="" selected disabled>Select a Role</option>
-                            <option value="1">Administrator</option>
-                            <option value="2">Supervisor</option>
-                            <option value="3">Trainee</option>
+                                <option value="" disabled>Select a Role</option>
+                                <option value="1" {{ $user->role_id === 1 ? 'selected' : '' }}>Administrator</option>
+                                <option value="2" {{ $user->role_id === 2 ? 'selected' : '' }}>Supervisor</option>
+                                <option value="3" {{ $user->role_id === 3 ? 'selected' : '' }}>Trainee</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="inputEmail4">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" required value="{{ old('email')}}">
+                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" required value="{{ $user->email }}">
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputPassword4">Temporary Password</label>
-                        <input type="text" class="form-control" id="inputPassword4" placeholder="Temporary Password" name="temp-password" required value="{{ old('temp-password')}}">
-                    </div>
+                    @method('PUT')
                 </div>
 
                 @if ($errors->any())

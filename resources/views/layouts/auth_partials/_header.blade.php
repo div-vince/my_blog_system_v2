@@ -28,12 +28,6 @@
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
-    {{-- Internal Style --}}
-    <style>
-        .login-card {
-            margin-top: 190px;
-        }
-    </style>
 
 </head>
 <body class="bg-gradient-primary">

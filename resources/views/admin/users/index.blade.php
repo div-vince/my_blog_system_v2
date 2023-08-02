@@ -54,7 +54,7 @@
             </tbody>
         </table>
             @if(isset($user_name))
-              <div class="alert alert-success mb-0">
+              <div class="alert alert-success m-2">
                 <strong>Success!</strong> {{ $user_name }}'s information has been successfully updated.
               </div>
             @endif

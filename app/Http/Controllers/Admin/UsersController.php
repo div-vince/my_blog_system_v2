@@ -57,8 +57,10 @@ class UsersController extends Controller
             $users = User::all();
             
             return view('admin.users.index')->with('users',$users);
-            // return redirect()->route('success')->with('success', 'Data saved successfully!');
-        } catch (ValidationException $e) {
+
+        } 
+        
+        catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
     }
@@ -96,7 +98,33 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'role' => 'required|numeric',
+                'email' => 'required|email',
+            ]);
+    
+            $user = User::findOrFail($id);
+            
+            $user->update([
+                'name' => $request->name,
+                'role_id' => $request->role,
+                'email' => $request->email,
+            ]);
+    
+            $users = User::all();
+            
+            return view('admin.users.index')->with([
+                'users'=>$users,
+                'user_name'=>$user->name
+            ]);
+            
+        } 
+        
+        catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        }
     }
 
     /**

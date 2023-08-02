@@ -7,7 +7,7 @@
     <div class="d-sm-flex align-items-center mx-4 my-3">
         <h1>Create New User</h1>
     </div>
-    <form action="{{route('users.store')}}" method="POST">
+    <form action="{{ route('users.store') }}" method="POST">
         @csrf
         <div class="card-body">
                 <div class="form-row">
